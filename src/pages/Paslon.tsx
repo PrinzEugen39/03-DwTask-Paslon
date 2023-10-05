@@ -1,10 +1,40 @@
+import {  useEffect } from "react";
+import BackToggle from "../components/BackToggle";
 import ThemeToggle from "../components/ThemeToggle";
+import { useTheme } from "../hooks/ThemeContext";
+
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Paslon() {
+  const { theme } = useTheme();
+
+
+  function fetchPaslon() {
+    axios
+      .get("http://localhost:9000/tasks")
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  useEffect(() => {
+    fetchPaslon()
+  },[])
+
   return (
     <>
       <div className="w-full h-min  p-10">
         <div className="flex justify-center">
+          <div className="grid flex-initial h-16 w-16 card place-items-center">
+            <Link to="/">
+              <BackToggle />
+            </Link>
+          </div>
+          <div className="divider lg:divider-horizontal"></div>
           <div className="grid flex-initial h-16 w-72  card bg-base-300 rounded-box place-items-center">
             <h1 className="text-2xl text-center font-bold">PEMILU PRESIDEN</h1>
           </div>
@@ -15,7 +45,11 @@ export default function Paslon() {
         </div>
         <div className="flex justify-center items-center py-10">
           <div className="grid gap-6 grid-cols-2 ">
-            <div className="card card-side bg-base-100 shadow-2xl w-[30rem] h-auto">
+            <div
+              className={`card card-side shadow-2xl w-[30rem] h-auto ${
+                theme === "dark" ? "bg-gray-700" : "bg-base-100"
+              }`}
+            >
               <figure>
                 <img
                   src="https://random.imagecdn.app/500/500"
@@ -23,7 +57,11 @@ export default function Paslon() {
                   className="w-[75%] rounded-2xl border-8 border-neutral-400"
                 />
               </figure>
-              <div className="card-body  ">
+              <div
+                className={`card-body ${
+                  theme === "dark" ? "text-white" : "text-black"
+                }`}
+              >
                 <h2 className="card-title">Patchouli</h2>
                 <p>Ekonomi maju</p>
                 <div className="card-actions justify-start">
@@ -36,7 +74,11 @@ export default function Paslon() {
                 </div>
               </div>
             </div>
-            <div className="card card-side bg-base-100 shadow-2xl w-[30rem] h-auto">
+            <div
+              className={`card card-side shadow-2xl w-[30rem] h-auto ${
+                theme === "dark" ? "bg-gray-700" : "bg-base-100"
+              }`}
+            >
               <figure>
                 <img
                   src="https://random.imagecdn.app/500/500"
@@ -44,7 +86,11 @@ export default function Paslon() {
                   className="w-[75%] rounded-2xl border-8 border-neutral-400"
                 />
               </figure>
-              <div className="card-body  ">
+              <div
+                className={`card-body ${
+                  theme === "dark" ? "text-white" : "text-black"
+                }`}
+              >
                 <h2 className="card-title">Patchouli</h2>
                 <p>Ekonomi maju</p>
                 <div className="card-actions justify-start">
@@ -57,7 +103,11 @@ export default function Paslon() {
                 </div>
               </div>
             </div>
-            <div className="card card-side bg-base-100 shadow-2xl w-[30rem] h-auto">
+            <div
+              className={`card card-side shadow-2xl w-[30rem] h-auto ${
+                theme === "dark" ? "bg-gray-700" : "bg-base-100"
+              }`}
+            >
               <figure>
                 <img
                   src="https://random.imagecdn.app/500/500"
@@ -65,7 +115,11 @@ export default function Paslon() {
                   className="w-[75%] rounded-2xl border-8 border-neutral-400"
                 />
               </figure>
-              <div className="card-body  ">
+              <div
+                className={`card-body ${
+                  theme === "dark" ? "text-white" : "text-black"
+                }`}
+              >
                 <h2 className="card-title">Patchouli</h2>
                 <p>Ekonomi maju</p>
                 <div className="card-actions justify-start">
