@@ -1,0 +1,28 @@
+{
+  "tasks": [
+    {
+       "id":1,
+       "title":"Fix the navbar",
+       "description":"There is an issue with the navbar on the homepage. It is not displaying correctly on mobile devices.",
+       "author":"Mario",
+       "img": "/img/mario.png",
+       "partai": "Mushroom Kingdom"
+    },
+    {
+       "id":2,
+       "title":"Add links to the footer",
+       "description":"The footer is currently empty. We need to add some links to important pages on the site.",
+       "author":"Yoshi",
+       "img": "/img/yoshi.png",
+       "partai": "Yoshman Republic"
+    },
+    {
+       "id":3,
+       "title":"Update the contact form",
+       "description":"The contact form is not working properly. We need to fix the form validation and make sure the form submissions are being sent to the correct email address.",
+       "author":"Peach",
+       "img": "/img/peach.png",
+       "partai": "Toad Democrats"
+    }
+ ]
+}

@@ -7,7 +7,7 @@ function ThemeProvider({ children }: { theme: string, children: React.ReactNode 
   const [theme, setTheme] = useLocalStorage("theme", "dark");
 
   const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    setTheme(theme === "dark" ? "cupcake" : "dark");
   };
 
   return <ThemeContext.Provider 
