@@ -1,48 +1,32 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PageNav from "../Homepage/HomepageNav";
-import { useAuth } from "../../hooks/FakeAuthContext";
+import { useAuth } from "../../hooks/FakeAuthContext.jsx";
 
 import { FaGoogle, FaFacebook } from "react-icons/fa6";
+import Leftside from "./Leftside";
 
 export default function Login() {
   const [email, setEmail] = useState("mikumiku@example.com");
   const [password, setPassword] = useState("qwerty");
 
   const navigate = useNavigate();
-  const { isAuthenticated, login } = useAuth();
+  const auth = useAuth();
 
   function handleSubmit(e : React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (email && password) login(email, password);
+    if (email && password && auth?.login) auth.login(email, password);
   }
 
   useEffect(() => {
-    if (isAuthenticated) navigate("/paslon");
-  }, [isAuthenticated, navigate]);
+    if (auth?.isAuthenticated) navigate("/paslon");
+  }, [auth, navigate]);
 
   return (
     <>
       <PageNav />
       <section className="h-screen flex items-stretch text-white ">
-        <div
-          className="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center"
-          style={{ backgroundImage: "url(hero.jpg)" }}
-        >
-          <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
-          <div className="w-full px-24 z-10 -mt-[4rem]">
-            <h1 className="text-5xl font-bold text-left tracking-wide">
-              Paslon
-            </h1>
-            <p className="text-3xl my-4">
-              BING CHILLING 🥶🍦 wǒ hěn xǐhuān BING CHILLING 🥶🍦 dànshì sùdù yǔ
-              jīqíng 9 bǐ BING CHILLING 🥶🍦
-            </p>
-          </div>
-          <div className="bottom-0 absolute p-4 text-center right-0 left-0 flex justify-center space-x-4">
-            {/* logo */}
-          </div>
-        </div>
+        <Leftside />
         <div className="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0">
           <div className="w-full z-20 -mt-[4rem]">
             <h1 className="mb-6 font-bold text-4xl">Login With</h1>
@@ -84,11 +68,11 @@ export default function Login() {
                 </button>
               </div>
               <div className="px-4 pb-2 pt-4">
-                <Link to="/paslon">
-                  <button className="uppercase block w-full p-4 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none">
+                
+                  <button type="submit" className="uppercase block w-full p-4 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none">
                     sign in
                   </button>
-                </Link>
+   
               </div>
 
               <div className="p-4 text-center right-0 left-0 flex justify-center space-x-4 mt-16 lg:hidden ">

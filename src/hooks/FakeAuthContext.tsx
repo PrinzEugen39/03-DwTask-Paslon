@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useReducer } from "react";
+import { ReactNode, createContext, useContext, useReducer, Dispatch } from "react";
 
 export interface iAuthContext {
   isAuthenticated?: boolean;
@@ -7,24 +7,25 @@ export interface iAuthContext {
   login?: (email: string, password: string) => void;
   logout?: () => void;
 }
+
 const AuthContext = createContext<iAuthContext | null>(null);
 
-const initialState = {
-  user: null,
-  isAuthenticated: false,
-};
 
 interface State {
   user: object;
   isAuthenticated: boolean;
 }
-
 interface Action {
-  payload?: any;
   type: string;
+  payload?: typeof FAKE_USER;
 }
 
-function reducer(state: State, action: Action) {
+const initialState: State = {
+  user: {},
+  isAuthenticated: false,
+};
+
+function reducer(state: State, action:Action) {
   switch (action.type) {
     case "login":
       return { ...state, user: action.payload, isAuthenticated: true };
@@ -41,12 +42,9 @@ const FAKE_USER = {
 };
 
 function AuthProvider({ children }: iAuthContext) {
-  const [{ user, isAuthenticated }, dispatch] = useReducer(
-    reducer,
-    initialState
-  );
+  const [{ user, isAuthenticated }, dispatch]: [State, Dispatch<Action>] = useReducer(reducer, initialState);
 
-  function login(email: string, password: string) {
+  function login(email: string, password:string) {
     if (email === FAKE_USER.email && password === FAKE_USER.password) {
       dispatch({ type: "login", payload: FAKE_USER });
     }
@@ -69,6 +67,7 @@ function useAuth() {
     throw new Error("AuthContext was used outside of AuthProvider");
   return context;
 }
+
 
 // eslint-disable-next-line react-refresh/only-export-components
 export { AuthProvider, useAuth };

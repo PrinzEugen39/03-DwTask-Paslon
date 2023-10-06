@@ -10,7 +10,7 @@ interface Paslon {
   id: number;
   author: string;
   img: string;
-  partai?: string;
+  partai: string;
 }
 //https://58df-2404-8000-1004-32cf-89fc-9387-7226-61ca.ngrok-free.app/api/v1/paslons
 // https://pink-ravens-switch.loca.lt/api/v1/paslons

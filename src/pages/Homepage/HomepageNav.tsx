@@ -4,20 +4,20 @@ function PageNav() {
   return (
     <div className="navbar bg-base-100 text-primary-content z-[99]">
       <div className="navbar-start">
-        <a className="btn btn-ghost normal-case text-xl ">
+        <p className="btn btn-ghost normal-case text-xl ">
           <Link to="/">
             <img src="vite.svg" alt="logo" />
           </Link>
-        </a>
+        </p>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a>Paslon</a>
+            <p>Paslon</p>
           </li>
           <li>
             <Link to="/contact">
-              <a>Contact</a>
+              <p>Contact</p>
             </Link>
           </li>
         </ul>
