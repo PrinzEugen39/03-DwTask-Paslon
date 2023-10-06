@@ -1,9 +1,13 @@
+import { Link } from "react-router-dom";
+
 function PageNav() {
   return (
-    <div className="navbar bg-base-100 text-primary-content">
+    <div className="navbar bg-base-100 text-primary-content z-[99]">
       <div className="navbar-start">
         <a className="btn btn-ghost normal-case text-xl ">
-          <img src="vite.svg" alt="logo" /> 
+          <Link to="/">
+            <img src="vite.svg" alt="logo" />
+          </Link>
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -12,12 +16,16 @@ function PageNav() {
             <a>Paslon</a>
           </li>
           <li>
-            <a>Contact</a>
+            <Link to="/contact">
+              <a>Contact</a>
+            </Link>
           </li>
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Login</a>
+        <Link to="/login">
+          <button className="btn btn-accent font-bold">Login</button>
+        </Link>
       </div>
     </div>
   );

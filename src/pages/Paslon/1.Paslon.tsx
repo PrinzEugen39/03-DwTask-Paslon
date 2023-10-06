@@ -1,56 +1,55 @@
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import { useTheme } from "../../hooks/ThemeContext";
 
-import axios from "axios";
 import DropdownHover from "../../components/DropdownHover";
 import AddPartaiDrawer from "../../components/AddPartaiDrawer";
 import PaslonHeader from "./PaslonHeader";
 
 interface Paslon {
-  id?: number;
-  title?: string;
-  description?: string;
-  author?: string;
-  img?: string;
+  id: number;
+  author: string;
+  img: string;
   partai?: string;
 }
+//https://58df-2404-8000-1004-32cf-89fc-9387-7226-61ca.ngrok-free.app/api/v1/paslons
+// https://pink-ravens-switch.loca.lt/api/v1/paslons
 
 export default function Paslon() {
   const { theme } = useTheme();
-  const [paslon, setPaslon] = useState<Paslon[]>([]);
+  const [newPaslon, setNewPaslon] = useState<Paslon[]>([]);
 
+  
   function fetchPaslon() {
     axios
-      .get("http://localhost:9000/tasks")
+      .get("http://localhost:9000/paslons")
       .then((res) => {
-        setPaslon(res.data);
+        setNewPaslon(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }
-
+  
   useEffect(() => {
     fetchPaslon();
   }, []);
-
+  
   return (
     <>
       <div className="w-full h-min  p-10">
         <PaslonHeader />
         <div className="flex justify-center items-center py-10">
           <div className="grid gap-6 grid-cols-2 ">
-            {paslon.map((data) => (
-              <div
-                className={`card card-side shadow-2xl w-[30rem] h-auto ${
-                  theme === "dark" ? "bg-gray-700" : "bg-base-100"
-                }`}
+            {newPaslon.map((paslon) => (
+              <div key={paslon.id}
+              className={`card card-side shadow-2xl w-[30rem] h-auto ${theme === "dark" ? "bg-gray-700" : "bg-base-100"}`}
               >
                 <figure>
                   <img
-                    src={data.img}
+                    src={paslon.img}
                     alt="paslon_profile"
-                    className="w-[75%] rounded-2xl border-8 border-neutral-400"
+                    className="w-[75%] h-auto rounded-2xl border-8 border-neutral-400"
                   />
                 </figure>
                 <div
@@ -58,14 +57,14 @@ export default function Paslon() {
                     theme === "dark" ? "text-white" : "text-black"
                   }`}
                 >
-                  <h2 className="card-title">{data.author}</h2>
+                  <h2 className="card-title">{paslon.author}</h2>
                   <p>Ekonomi maju</p>
                   <div className="card-actions justify-start">
                     <h2 className="text-md text-left font-semibold mt-10">
                       Partai Pengusung:
                     </h2>
                     <ul className="text-md text-left font-light list-inside list-disc">
-                      <li>{data.partai}</li>
+                      <li>{paslon.partai}</li>
                     </ul>
                     <div className="static">
                       <DropdownHover />
@@ -76,9 +75,9 @@ export default function Paslon() {
             ))}
           </div>
         </div>
-        
-          <AddPartaiDrawer />
-        
+
+        <AddPartaiDrawer />
+
         <div className="w-full lg:w-3/4 mx-auto flex flex-col lg:flex-row gap-10 mt-10">
           <div className="flex-[35%]  w-full p-5 lg:p-10 rounded-2xl drop-shadow-md border border-neutral-100">
             <h1 className="text-xl text-left  font-bold">Suara Saat Ini:</h1>
@@ -96,7 +95,6 @@ export default function Paslon() {
             <input
               type="text"
               className="  mt-1 border border-neutral-900 rounded-xl p-3"
-              value="voterName"
             />
             <p className="text-sm text-left  font-light mt-1">
               Pilih paslon menurut pilihan hati dan pikiranmu yang random,
@@ -109,7 +107,6 @@ export default function Paslon() {
                     className="radio radio-accent"
                     type="radio"
                     name="paslon"
-                    value=""
                     id=""
                   />
                   <span className="label-text text-md lg:text-xl  font-bold">
