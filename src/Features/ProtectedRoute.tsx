@@ -7,12 +7,12 @@ interface Props {
 }
 
 export default function ProtectedRoute({ children }: Props) {
-  const AuthContext = useAuth();
+  const auth = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!AuthContext || !AuthContext.isAuthenticated) navigate("/");
-  }, [AuthContext, navigate]);
+    if (!auth || !auth.isAuthenticated) navigate("/");
+  }, [auth, navigate]);
 
-  return AuthContext && AuthContext.isAuthenticated ? children : null;
+  return auth && auth.isAuthenticated ? children : null;
 }
